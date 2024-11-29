@@ -1,7 +1,7 @@
-package year2023
+package me.koendev.year2023
 
-import println
-import getInput
+import me.koendev.println
+import me.koendev.getInput
 
 fun main() {
     part1(getInput(2023, 5)).println()

@@ -1,3 +1,5 @@
+package me.koendev
+
 import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
