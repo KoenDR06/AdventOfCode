@@ -30,8 +30,7 @@ def create_solution_file(year, day):
     if not solution_file.exists():
         f = open(path + f"/Day{day}.kt", "w")
         f.write(
-f'''
-package year{year}
+f'''package year{year}
 
 import me.koendev.println
 import me.koendev.getInput
