@@ -33,8 +33,8 @@ def create_solution_file(year, day):
 f'''
 package year{year}
 
-import println
-import getInput
+import me.koendev.println
+import me.koendev.getInput
 
 fun main() {{
     part1(getInput({year}, {day})).println()
