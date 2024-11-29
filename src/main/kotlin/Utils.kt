@@ -1,10 +1,12 @@
 package me.koendev
 
 import java.io.File
+import java.math.BigInteger
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.security.MessageDigest
 
 fun fetchInput(year: Int, day: Int) {
     val client = HttpClient.newBuilder().build()
@@ -32,6 +34,11 @@ fun <T> T.println(): T {
     return this
 }
 
+fun <T> T.wait(): T {
+    readln()
+    return this
+}
+
 fun findLCM(a: Long, b: Long): Long {
     val larger = if (a > b) a else b
     val maxLcm = a * b
@@ -52,3 +59,6 @@ fun findLCM(numbers: MutableList<Long>): Long {
     }
     return result
 }
+
+fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+    .toString(16)

@@ -1,7 +1,6 @@
 package me.koendev.year2023
 
-import me.koendev.println
-import me.koendev.getInput
+import me.koendev.*
 import kotlin.math.abs
 
 fun main() {

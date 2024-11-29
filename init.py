@@ -32,8 +32,7 @@ def create_solution_file(year, day):
         f.write(
 f'''package year{year}
 
-import me.koendev.println
-import me.koendev.getInput
+import me.koendev.*
 
 fun main() {{
     part1(getInput({year}, {day})).println()

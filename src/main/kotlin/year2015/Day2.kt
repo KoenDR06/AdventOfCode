@@ -1,7 +1,6 @@
 package year2015
 
-import me.koendev.println
-import me.koendev.getInput
+import me.koendev.*
 
 fun main() {
     part2(listOf("2x3x4")).println()
