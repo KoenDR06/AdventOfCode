@@ -1,12 +1,14 @@
 package me.koendev
 
 import java.io.File
+import java.io.Serializable
 import java.math.BigInteger
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.security.MessageDigest
+import kotlin.Pair
 
 fun fetchInput(year: Int, day: Int) {
     val client = HttpClient.newBuilder().build()
@@ -15,7 +17,7 @@ fun fetchInput(year: Int, day: Int) {
         .header("Cookie", "session=${dotEnv["SESSION"]}")
         .build()
 
-    val response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    val response = client.send(request, HttpResponse.BodyHandlers.ofString())
     val input = response.body()
 
     File("src/main/resources/input/$year").mkdirs()
@@ -35,6 +37,7 @@ fun <T> T.println(): T {
 }
 
 fun <T> T.wait(): T {
+    this.println()
     readln()
     return this
 }
@@ -60,5 +63,19 @@ fun findLCM(numbers: MutableList<Long>): Long {
     return result
 }
 
-fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
+fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
     .toString(16)
+
+fun <T> List<T>.permutations(): List<List<T>> = if(isEmpty()) listOf(emptyList()) else  mutableListOf<List<T>>().also{result ->
+    for(i in this.indices){
+        (this - this[i]).permutations().forEach {
+            result.add(it + this[i])
+        }
+    }
+}
+
+
+data class MutablePair<A, B>(
+    var first: A,
+    var second: B
+) : Serializable

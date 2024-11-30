@@ -14,10 +14,7 @@ fun main() {
 //        "NOT y -> i"
 //    )).println()
     part1(getInput(2015, 7)).println()
-//    part2(getInput(2015, 7)).println()
-
-    val a: UShort = 123u
-    (a.inv()).toUShort().println()
+    part2(getInput(2015, 7)).println()
 }
 
 private fun followWire(wire: String, wires: MutableMap<String, String>): Int {
@@ -42,16 +39,14 @@ private fun followWire(wire: String, wires: MutableMap<String, String>): Int {
         } catch (e: NumberFormatException) {
             followWire(tokens[0], wires)
         }
-        wires[wire] = a.toString()
 
         val b = try {
             tokens[2].toInt()
         } catch (e: NumberFormatException) {
             followWire(tokens[2], wires)
         }
-        wires[wire] = b.toString()
 
-        return if (tokens[1] == "AND") {
+        wires[wire] = (if (tokens[1] == "AND") {
             a and b
         } else if (tokens[1] == "OR") {
             a or b
@@ -61,7 +56,8 @@ private fun followWire(wire: String, wires: MutableMap<String, String>): Int {
             a shr b
         } else {
             throw UnsupportedOperationException()
-        }
+        }).toString()
+        return wires[wire]!!.toInt()
     } else {
         throw UnsupportedOperationException()
     }
@@ -83,5 +79,30 @@ private fun part1(input: List<String>): Int {
 
 
 private fun part2(input: List<String>): Int {
-    return 0
+    var wires: MutableMap<String, String> = mutableMapOf()
+
+    for (line in input) {
+        val splits = line.split(" -> ")
+        val operation = splits[0]
+        val variable = splits[1]
+
+        wires[variable] = operation
+    }
+
+
+    val valueA = followWire("a", wires)
+
+    wires = mutableMapOf()
+
+    for (line in input) {
+        val splits = line.split(" -> ")
+        val operation = splits[0]
+        val variable = splits[1]
+
+        wires[variable] = operation
+    }
+
+    wires["b"] = valueA.toString()
+
+    return followWire("a", wires)
 }
