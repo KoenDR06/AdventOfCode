@@ -41,11 +41,15 @@ fun main() {{
 
 
 private fun part1(input: List<String>): Int {{
+
+
     return 0
 }}
 
 
 private fun part2(input: List<String>): Int {{
+
+
     return 0
 }}
 ''')
