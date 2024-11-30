@@ -25,7 +25,7 @@ private fun part1(input: List<String>) : Int {
     return sum
 }
 
-fun checkSpace(input: List<String>, coords: Pair<Int, Int>) : Boolean {
+private fun checkSpace(input: List<String>, coords: Pair<Int, Int>) : Boolean {
     var foundCharacter = false
 
     for(x in coords.first - 1..coords.first) {
