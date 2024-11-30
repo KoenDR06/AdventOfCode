@@ -28,7 +28,7 @@ def create_solution_file(year, day):
     solution_file = Path(path + f"/Day{day}.kt")
 
     if not solution_file.exists():
-        f = open(path + f"/Day{day}.kt", "w")
+        f = open(path + f"/Day{day}.kt", "a")
         f.write(
 f'''package year{year}
 
