@@ -22,7 +22,7 @@ private fun part1(input: List<String>): Int {
             tokens.last().second++
         }
 
-        var res: MutableList<Int> = mutableListOf()
+        val res: MutableList<Int> = mutableListOf()
         for (token in tokens) {
             res.add(token.second)
             res.add(token.first)
@@ -49,7 +49,7 @@ private fun part2(input: List<String>): Int {
             tokens.last().second++
         }
 
-        var res: MutableList<Int> = mutableListOf()
+        val res: MutableList<Int> = mutableListOf()
         for (token in tokens) {
             res.add(token.second)
             res.add(token.first)

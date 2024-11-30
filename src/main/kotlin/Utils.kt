@@ -8,7 +8,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.security.MessageDigest
-import kotlin.Pair
 
 fun fetchInput(year: Int, day: Int) {
     val client = HttpClient.newBuilder().build()
