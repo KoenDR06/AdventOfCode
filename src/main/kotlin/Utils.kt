@@ -73,6 +73,14 @@ fun <T> List<T>.permutations(): List<List<T>> = if(isEmpty()) listOf(emptyList()
     }
 }
 
+fun MutableList<Int>.diffs(): List<Int> {
+    val res = mutableListOf<Int>()
+
+    for (index in 0..< this.size-1) {
+        res.add(this[index] - this[index+1])
+    }
+    return res
+}
 
 data class MutablePair<A, B>(
     var first: A,
