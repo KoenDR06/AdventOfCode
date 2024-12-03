@@ -1,46 +1,23 @@
 package me.koendev
 
-import java.io.File
 import java.io.Serializable
 import java.math.BigInteger
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 import java.security.MessageDigest
 
-fun fetchInput(year: Int, day: Int) {
-    val client = HttpClient.newBuilder().build()
-    val request = HttpRequest.newBuilder()
-        .uri(URI.create("https://adventofcode.com/$year/day/$day/input"))
-        .header("Cookie", "session=${dotEnv["SESSION"]}")
-        .build()
-
-    val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-    val input = response.body()
-
-    File("src/main/resources/input/$year").mkdirs()
-    File("src/main/resources/input/$year/$day.txt").writeText(input)
-}
-
-fun getInput(year: Int, day: Int): List<String> {
-    if (!File("src/main/resources/input/$year/$day.txt").exists()) fetchInput(year, day)
-
-    val puzzleInputFile = File("src/main/resources/input/$year/$day.txt")
-    return puzzleInputFile.readLines()
-}
-
+@Suppress("Unused")
 fun <T> T.println(): T {
     println(this)
     return this
 }
 
+@Suppress("Unused")
 fun <T> T.wait(): T {
     this.println()
     readln()
     return this
 }
 
+@Suppress("Unused")
 fun findLCM(a: Long, b: Long): Long {
     val larger = if (a > b) a else b
     val maxLcm = a * b
@@ -54,6 +31,7 @@ fun findLCM(a: Long, b: Long): Long {
     return maxLcm
 }
 
+@Suppress("Unused")
 fun findLCM(numbers: MutableList<Long>): Long {
     var result = numbers[0]
     for (i in 1..<numbers.size) {
@@ -62,9 +40,11 @@ fun findLCM(numbers: MutableList<Long>): Long {
     return result
 }
 
+@Suppress("Unused")
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
     .toString(16)
 
+@Suppress("Unused")
 fun <T> List<T>.permutations(): List<List<T>> =
     if(isEmpty()) listOf(emptyList())
     else mutableListOf<List<T>>().also{result ->
@@ -75,6 +55,7 @@ fun <T> List<T>.permutations(): List<List<T>> =
         }
     }
 
+@Suppress("Unused")
 fun MutableList<Int>.diffs(): List<Int> {
     val res = mutableListOf<Int>()
 
@@ -84,6 +65,7 @@ fun MutableList<Int>.diffs(): List<Int> {
     return res
 }
 
+@Suppress("Unused")
 data class MutablePair<A, B>(
     var first: A,
     var second: B
