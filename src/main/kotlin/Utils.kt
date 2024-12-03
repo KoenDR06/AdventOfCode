@@ -65,13 +65,15 @@ fun findLCM(numbers: MutableList<Long>): Long {
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
     .toString(16)
 
-fun <T> List<T>.permutations(): List<List<T>> = if(isEmpty()) listOf(emptyList()) else  mutableListOf<List<T>>().also{result ->
-    for(i in this.indices){
-        (this - this[i]).permutations().forEach {
-            result.add(it + this[i])
+fun <T> List<T>.permutations(): List<List<T>> =
+    if(isEmpty()) listOf(emptyList())
+    else mutableListOf<List<T>>().also{result ->
+        for(i in this.indices){
+            (this - this[i]).permutations().forEach {
+                result.add(it + this[i])
+            }
         }
     }
-}
 
 fun MutableList<Int>.diffs(): List<Int> {
     val res = mutableListOf<Int>()
