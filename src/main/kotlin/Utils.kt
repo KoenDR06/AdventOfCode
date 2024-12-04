@@ -70,3 +70,11 @@ data class MutablePair<A, B>(
     var first: A,
     var second: B
 ) : Serializable
+
+@Suppress("Unused")
+class MutableTriple<A, B, C>(
+    var first: A,
+    var second: B,
+    var third: C
+
+)

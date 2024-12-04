@@ -64,10 +64,3 @@ private fun part2(input: List<String>): Int {
     }
     return sum
 }
-
-class MutableTriple<out A, out B, out C>(
-    var first: @UnsafeVariance A,
-    var second: @UnsafeVariance B,
-    var third: @UnsafeVariance C
-
-)
