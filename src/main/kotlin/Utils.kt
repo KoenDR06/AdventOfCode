@@ -78,3 +78,31 @@ class MutableTriple<A, B, C>(
     var third: C
 
 )
+
+// Grid Utils
+@Suppress("Unused")
+fun List<String>.get(x: Int, y: Int) = this[y][x]
+
+@Suppress("Unused")
+fun List<String>.getColumn(col: Int): String {
+    var res = ""
+
+    for (line in this) {
+        res += line[col]
+    }
+
+    return res
+}
+
+@Suppress("Unused")
+fun List<String>.transpose(): List<String> {
+    if (!this.all { it.length == this[0].length }) throw IllegalArgumentException("Input is not a grid.")
+
+    val res = MutableList(this[0].length) { "" }
+    for ((y, line) in this.withIndex()) {
+        for ((x, char) in line.withIndex()) {
+            res[x] = res[x] + char
+        }
+    }
+    return res
+}
