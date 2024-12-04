@@ -4,7 +4,6 @@ import me.koendev.*
 
 fun main() {
     part1(getInput(2015, 12)).println()
-    part2(getInput(2015, 12)).println()
 }
 
 private fun part1(input: List<String>): Int {
@@ -14,11 +13,4 @@ private fun part1(input: List<String>): Int {
     }
 
     return sum
-}
-
-
-private fun part2(input: List<String>): Int {
-
-
-    return 0
 }
