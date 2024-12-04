@@ -77,7 +77,6 @@ private fun part1(input: List<String>): Int {
     return followWire("a", wires)
 }
 
-
 private fun part2(input: List<String>): Int {
     var wires: MutableMap<String, String> = mutableMapOf()
 

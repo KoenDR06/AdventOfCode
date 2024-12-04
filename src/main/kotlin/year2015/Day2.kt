@@ -3,7 +3,6 @@ package year2015
 import me.koendev.*
 
 fun main() {
-    part2(listOf("2x3x4")).println()
     part1(getInput(2015, 2)).println()
     part2(getInput(2015, 2)).println()
 }
