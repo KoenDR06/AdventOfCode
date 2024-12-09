@@ -3,7 +3,7 @@
 gradle/
 src/main/resources/input/
 build/
-
+.venv/
 
 
 .env
