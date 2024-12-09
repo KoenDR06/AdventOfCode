@@ -1,7 +1,6 @@
 package me.koendev.year2023
 
 import me.koendev.*
-import me.koendev.findLCM
 
 fun main() {
     solve(
@@ -60,7 +59,7 @@ private fun part2(input: List<String>): Long {
 
     var running = true
     var stepsTaken = 0L
-    var intervals = mutableListOf<Long>()
+    val intervals = mutableListOf<Long>()
     while (running) {
         for (step in steps) {
             if (step == 'L') {
