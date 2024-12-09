@@ -48,13 +48,6 @@ private fun part1(input: List<String>): Int {
         }
     }
 
-    for (line in mutableInput) {
-        for (char in line) {
-            print(char)
-        }
-        println()
-    }
-
     val galaxies: MutableList< Pair<Int, Int> > = mutableListOf()
     for ((y, line) in mutableInput.withIndex()) {
         for ((x, char) in line.withIndex()) {
@@ -118,22 +111,12 @@ private fun part2(input: List<String>): Long {
         }
     }
 
-    for (line in mutableInput) {
-        for (char in line) {
-            print(char)
-        }
-        println()
-    }
-
     val galaxies: MutableList< Pair<Int, Int> > = mutableListOf()
     for ((y, line) in mutableInput.withIndex()) {
         for ((x, char) in line.withIndex()) {
             if (char == '#') galaxies.add(Pair(x, y))
         }
     }
-
-//    emptyRows.count().println()
-//    emptyColumns.count().println()
 
     var sum = 0L
     for (a in galaxies) {

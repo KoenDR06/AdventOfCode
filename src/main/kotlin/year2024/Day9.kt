@@ -16,14 +16,14 @@ private fun part1(input: List<String>): Long {
     var fileValue = 0L
     for ((index, char) in input[0].withIndex()) {
         if (index % 2 == 0) {
-            for (i in 1..char.toString().toInt()) {
+            for (i in 1..char.digitToInt()) {
                 disk.add(fileValue)
             }
             fileValue++
         }
 
         else {
-            for (i in 1..char.toString().toInt()) {
+            for (i in 1..char.digitToInt()) {
                 disk.add(-1L)
             }
         }
@@ -61,7 +61,7 @@ private fun part2(input: List<String>): Long {
         }
 
         else {
-            if (char.toString().toInt() == 0) continue
+            if (char.digitToInt() == 0) continue
             disk.add(File(position..< position+char.toString().toLong(), -1))
             position += char.toString().toLong()
         }

@@ -14,7 +14,7 @@ fun main() {
 private fun part1(input: List<String>): Int {
     var inputArray: MutableList<Int> = mutableListOf()
     for (char in input[0]) {
-        inputArray.add(char.toString().toInt())
+        inputArray.add(char.digitToInt())
     }
 
     for (i in 1..40) {
@@ -41,7 +41,7 @@ private fun part1(input: List<String>): Int {
 private fun part2(input: List<String>): Int {
     var inputArray: MutableList<Int> = mutableListOf()
     for (char in input[0]) {
-        inputArray.add(char.toString().toInt())
+        inputArray.add(char.digitToInt())
     }
 
     for (i in 1..50) {

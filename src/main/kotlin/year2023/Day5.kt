@@ -48,8 +48,6 @@ private fun part1(input: List<String>): Long {
         }
     }
 
-    "Data gathered, starting map conversion now.".println()
-
     var seedList = 1
     for(map in maps) {
         for(index in seeds[seedList].indices) {
@@ -137,10 +135,6 @@ private fun getMinOfPart(input: List<String>, min: Long, max: Long) : Long{
             searchNumbers = true
         }
     }
-
-
-    "Data gathered, starting map conversion now.".println()
-
 
     var seedList = 1
     for(map in maps) {

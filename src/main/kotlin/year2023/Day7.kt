@@ -83,14 +83,6 @@ private fun part1(input: List<String>) : Int {
     onePairs.sortByDescending { it.first }
     highCards.sortByDescending { it.first }
 
-//    highCards.println()
-//    onePairs.println()
-//    twoPairs.println()
-//    threeOfAKinds.println()
-//    fullHouses.println()
-//    fourOfAKinds.println()
-//    fiveOfAKinds.println()
-
     for (hand in highCards) winnings += hand.second * rank++
     for (hand in onePairs) winnings += hand.second * rank++
     for (hand in twoPairs) winnings += hand.second * rank++
@@ -221,14 +213,6 @@ private fun part2(input: List<String>) : Int {
     twoPairs.sortByDescending { it.first }
     onePairs.sortByDescending { it.first }
     highCards.sortByDescending { it.first }
-
-//    highCards.println()
-//    onePairs.println()
-//    twoPairs.println()
-//    threeOfAKinds.println()
-//    fullHouses.println()
-//    fourOfAKinds.println()
-//    fiveOfAKinds.println()
 
     for (hand in highCards) winnings += hand.second * rank++
     for (hand in onePairs) winnings += hand.second * rank++

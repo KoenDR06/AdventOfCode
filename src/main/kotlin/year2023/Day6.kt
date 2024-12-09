@@ -14,8 +14,8 @@ fun main() {
 
 
 private fun part1(input: List<String>) : Int {
-    val maxTime = input[0].split(" ")
-    val minThreshold = input[1].split(" ")
+    val maxTime = input[0].slice(10..< input[0].length).split(" ").filter {it != ""}
+    val minThreshold = input[1].slice(10..< input[0].length).split(" ").filter {it != ""}
     var sum = 1
 
     for(i in maxTime.indices) {
@@ -30,21 +30,15 @@ private fun part1(input: List<String>) : Int {
 }
 
 private fun part2(input: List<String>) : Long {
-    val maxTime = input[0].replace(" ", "").toLong()
-    maxTime.println()
-    val minThreshold = input[1].replace(" ", "").toLong()
-    minThreshold.println()
+    val maxTime = input[0].slice(10..< input[0].length).replace(" ", "").toLong()
+    val minThreshold = input[1].slice(10..< input[0].length).replace(" ", "").toLong()
     var sum = 0L
 
     for(x in 0..maxTime) {
-        430121812131276.println()
-        (x * (maxTime - x)).println()
-        "".println()
         if(x * (maxTime - x) > minThreshold) {
             sum = (abs(x - (maxTime - x)) + 1)
             break
         }
-        readln()
     }
     return sum
 }
