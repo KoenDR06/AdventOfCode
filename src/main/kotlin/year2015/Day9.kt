@@ -3,8 +3,12 @@ package year2015
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2015, 9)).println()
-    part2(getInput(2015, 9)).println()
+    solve(
+        2015,
+        9,
+        ::part1,
+        ::part2
+    )
 }
 
 

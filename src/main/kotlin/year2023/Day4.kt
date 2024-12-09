@@ -4,8 +4,12 @@ import me.koendev.*
 import kotlin.math.pow
 
 fun main() {
-    part1(getInput(2023, 4)).println()
-    part2(getInput(2023, 4)).println()
+    solve(
+        2023,
+        4,
+        ::part1,
+        ::part2
+    )
 }
 
 

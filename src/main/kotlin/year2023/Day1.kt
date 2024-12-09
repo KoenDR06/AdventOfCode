@@ -3,8 +3,12 @@ package me.koendev.year2023
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2023, 1)).println()
-    part2(getInput(2023, 1)).println()
+    solve(
+        2023,
+        1,
+        ::part1,
+        ::part2
+    )
 }
 
 

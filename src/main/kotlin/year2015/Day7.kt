@@ -3,18 +3,12 @@ package year2015
 import me.koendev.*
 
 fun main() {
-//    part1(listOf(
-//        "123 -> x",
-//        "456 -> y",
-//        "x AND y -> d",
-//        "x OR y -> e",
-//        "x LSHIFT 2 -> f",
-//        "y RSHIFT 2 -> g",
-//        "NOT x -> h",
-//        "NOT y -> i"
-//    )).println()
-    part1(getInput(2015, 7)).println()
-    part2(getInput(2015, 7)).println()
+    solve(
+        2015,
+        7,
+        ::part1,
+        ::part2
+    )
 }
 
 private fun followWire(wire: String, wires: MutableMap<String, String>): Int {

@@ -5,8 +5,12 @@ import kotlin.math.abs
 import kotlin.math.sign
 
 fun main() {
-    part1(getInput(2024, 2)).println()
-    part2(getInput(2024, 2)).println()
+    solve(
+        2024,
+        2,
+        ::part1,
+        ::part2
+    )
 }
 
 

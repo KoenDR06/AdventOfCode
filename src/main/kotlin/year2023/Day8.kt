@@ -4,8 +4,12 @@ import me.koendev.*
 import me.koendev.findLCM
 
 fun main() {
-    part1(getInput(2023, 8)).println()
-    part2(getInput(2023, 8)).println()
+    solve(
+        2023,
+        8,
+        ::part1,
+        ::part2
+    )
 }
 
 private fun part1(input: List<String>): Int {

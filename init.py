@@ -35,13 +35,12 @@ f'''package year{year}
 import me.koendev.*
 
 fun main() {{
-    val input = getInput({year}, {day})
-
-    var start = System.currentTimeMillis()
-    println("Part 1 solution is `${{part1(input)}}` and took: " + (System.currentTimeMillis() - start))
-    
-    start = System.currentTimeMillis()
-    println("Part 2 solution is `${{part2(input)}}` and took: " + (System.currentTimeMillis() - start))
+solve(
+    {year},
+    {day},
+    ::part1,
+    ::part2
+    )
 }}
 
 

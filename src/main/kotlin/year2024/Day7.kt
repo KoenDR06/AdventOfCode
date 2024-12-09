@@ -3,8 +3,12 @@ package year2024
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2024, 7)).println()
-    part2(getInput(2024, 7)).println()
+    solve(
+        2024,
+        7,
+        ::part1,
+        ::part2
+    )
 }
 
 private fun solveCalibration(target: Long, values: MutableList<Long>): Long {

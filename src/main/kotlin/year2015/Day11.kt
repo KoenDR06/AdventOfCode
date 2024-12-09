@@ -3,8 +3,12 @@ package year2015
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2015, 11)).println()
-    part2(getInput(2015, 11)).println()
+    solve(
+        2015,
+        11,
+        ::part1,
+        ::part2
+    )
 }
 
 private fun convertToBase26(input: String, chars: String = "abcdefghijklmnopqrstuvwxyz"): MutableList<Int> {

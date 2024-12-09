@@ -3,8 +3,12 @@ package year2024
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2024, 8)).println()
-    part2(getInput(2024, 8)).println()
+    solve(
+        2024,
+        8,
+        ::part1,
+        ::part2
+    )
 }
 
 private data class Cell(var x: Int, var y: Int, var freq: Int)

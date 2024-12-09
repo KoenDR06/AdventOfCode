@@ -28,4 +28,14 @@ fun getInput(year: Int, day: Int): List<String> {
     return puzzleInputFile.readLines()
 }
 
+fun solve(year: Int, day: Int, part1: (input: List<String>) -> Any, part2: (input: List<String>) -> Any) {
+    val input = getInput(year, day)
+
+    var start = System.currentTimeMillis()
+    println("Part 1 solution is `${part1(input)}` and took: " + (System.currentTimeMillis() - start))
+
+    start = System.currentTimeMillis()
+    println("Part 2 solution is `${part2(input)}` and took: " + (System.currentTimeMillis() - start))
+}
+
 val dotEnv = dotenv()

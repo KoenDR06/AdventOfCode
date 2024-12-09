@@ -5,8 +5,12 @@ import me.koendev.md5
 import me.koendev.wait
 
 fun main() {
-    part1(getInput(2015, 4)).println()
-    part2(getInput(2015, 4)).println()
+    solve(
+        2015,
+        4,
+        ::part1,
+        ::part2
+    )
 }
 
 

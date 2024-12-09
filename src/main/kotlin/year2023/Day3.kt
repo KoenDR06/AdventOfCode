@@ -3,7 +3,12 @@ package me.koendev.year2023
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2023, 3)).println()
+    solve(
+        2023,
+        3,
+        ::part1,
+        ::part2
+    )
 }
 
 
@@ -39,4 +44,8 @@ private fun checkSpace(input: List<String>, coords: Pair<Int, Int>) : Boolean {
     }
 
     return foundCharacter
+}
+
+private fun part2(input: List<String>) : Int {
+    return 0
 }

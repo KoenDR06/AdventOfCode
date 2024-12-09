@@ -3,7 +3,12 @@ package year2015
 import me.koendev.*
 
 fun main() {
-    part1(getInput(2015, 12)).println()
+    solve(
+        2015,
+        12,
+        ::part1,
+        ::part2
+    )
 }
 
 private fun part1(input: List<String>): Int {
@@ -13,4 +18,8 @@ private fun part1(input: List<String>): Int {
     }
 
     return sum
+}
+
+private fun part2(input: List<String>): Int {
+    return 0
 }

@@ -1,15 +1,18 @@
 package year2024
 
-import me.koendev.getInput
-import me.koendev.println
+import me.koendev.*
 import kotlin.collections.List
 import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 import kotlin.collections.withIndex
 
 fun main() {
-    part1(getInput(2024, 6)).println()
-    part2(getInput(2024, 6)).println()
+    solve(
+        2024,
+        6,
+        ::part1,
+        ::part2
+    )
 }
 
 
