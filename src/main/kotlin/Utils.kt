@@ -106,3 +106,6 @@ fun List<String>.transpose(): List<String> {
     }
     return res
 }
+
+@Suppress("Unused")
+fun LongRange.length() = this.last - this.first + 1
