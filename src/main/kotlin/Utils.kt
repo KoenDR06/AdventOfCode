@@ -99,7 +99,7 @@ fun List<String>.transpose(): List<String> {
     if (!this.all { it.length == this[0].length }) throw IllegalArgumentException("Input is not a grid.")
 
     val res = MutableList(this[0].length) { "" }
-    for ((y, line) in this.withIndex()) {
+    for (line in this) {
         for ((x, char) in line.withIndex()) {
             res[x] = res[x] + char
         }
