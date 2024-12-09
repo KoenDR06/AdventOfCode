@@ -39,7 +39,7 @@ private fun checkSpace(input: List<String>, coords: Pair<Int, Int>) : Boolean {
                 if(input[x][y].digitToIntOrNull() == null && input[x][y] != '.') {
                     foundCharacter = true
                 }
-            } catch(e:IndexOutOfBoundsException) {}
+            } catch(_:IndexOutOfBoundsException) {}
         }
     }
 

@@ -15,10 +15,10 @@ fun main() {
 
 private fun part1(input: List<String>): Int {
     val mutableInput = mutableListOf< MutableList<Char> >()
-    for ((y, line) in input.withIndex()) {
+    for (line in input) {
         mutableInput.add(mutableListOf())
         var emptyLine = true
-        for ((x, char) in line.withIndex()) {
+        for (char in line) {
             if (char == '#') emptyLine = false
             mutableInput.last().add(char)
         }
@@ -95,7 +95,7 @@ private fun part2(input: List<String>): Long {
     for ((y, line) in input.withIndex()) {
         mutableInput.add(mutableListOf())
         var emptyLine = true
-        for ((x, char) in line.withIndex()) {
+        for (char in line) {
             if (char == '#') emptyLine = false
             mutableInput.last().add(char)
         }

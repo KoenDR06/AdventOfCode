@@ -13,47 +13,52 @@ fun main() {
 
 private fun followWire(wire: String, wires: MutableMap<String, String>): Int {
     val tokens = wires[wire]!!.split(" ")
-    if (tokens.size == 1) {
-        wires[wire] = try {
-            tokens[0].toInt().toString()
-        } catch (e: NumberFormatException) {
-            followWire(tokens[0], wires).toString()
+    when (tokens.size) {
+        1 -> {
+            wires[wire] = try {
+                tokens[0].toInt().toString()
+            } catch (e: NumberFormatException) {
+                followWire(tokens[0], wires).toString()
+            }
+            return wires[wire]!!.toInt()
         }
-        return wires[wire]!!.toInt()
-    } else if (tokens.size == 2) {
-        wires[wire] = try {
-            tokens[1].toInt().inv().toString()
-        } catch (e: NumberFormatException) {
-            followWire(tokens[1], wires).inv().toString()
+        2 -> {
+            wires[wire] = try {
+                tokens[1].toInt().inv().toString()
+            } catch (e: NumberFormatException) {
+                followWire(tokens[1], wires).inv().toString()
+            }
+            return wires[wire]!!.toInt()
         }
-        return wires[wire]!!.toInt()
-    } else if (tokens.size == 3) {
-        val a = try {
-            tokens[0].toInt()
-        } catch (e: NumberFormatException) {
-            followWire(tokens[0], wires)
-        }
+        3 -> {
+            val a = try {
+                tokens[0].toInt()
+            } catch (e: NumberFormatException) {
+                followWire(tokens[0], wires)
+            }
 
-        val b = try {
-            tokens[2].toInt()
-        } catch (e: NumberFormatException) {
-            followWire(tokens[2], wires)
-        }
+            val b = try {
+                tokens[2].toInt()
+            } catch (e: NumberFormatException) {
+                followWire(tokens[2], wires)
+            }
 
-        wires[wire] = (if (tokens[1] == "AND") {
-            a and b
-        } else if (tokens[1] == "OR") {
-            a or b
-        } else if (tokens[1] == "LSHIFT") {
-            a shl b
-        } else if (tokens[1] == "RSHIFT") {
-            a shr b
-        } else {
+            wires[wire] = (if (tokens[1] == "AND") {
+                a and b
+            } else if (tokens[1] == "OR") {
+                a or b
+            } else if (tokens[1] == "LSHIFT") {
+                a shl b
+            } else if (tokens[1] == "RSHIFT") {
+                a shr b
+            } else {
+                throw UnsupportedOperationException()
+            }).toString()
+            return wires[wire]!!.toInt()
+        }
+        else -> {
             throw UnsupportedOperationException()
-        }).toString()
-        return wires[wire]!!.toInt()
-    } else {
-        throw UnsupportedOperationException()
+        }
     }
 }
 

@@ -18,14 +18,11 @@ private fun part1(input: List<String>): Int {
     var x = 0
     var y = 0
     for (char in input[0]) {
-        if (char == 'v') {
-            y++
-        } else if (char == '<') {
-            x--
-        } else if (char == '^') {
-            y--
-        } else if (char == '>') {
-            x++
+        when (char) {
+            'v' -> y++
+            '<' -> x--
+            '^' -> y--
+            '>' -> x++
         }
 
         houses[Pair(x,y)] = true

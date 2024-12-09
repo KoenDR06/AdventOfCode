@@ -47,35 +47,42 @@ private fun part1(input: List<String>): Int {
     while (input[y][x] != 'S') {
         val ch = input[y][x]
 
-        if (ch == 'F') {
-            when (direction) {
-                0 -> { x++; direction = 1 }
-                3 -> { y++; direction = 2 }
+        when (ch) {
+            'F' -> {
+                when (direction) {
+                    0 -> { x++; direction = 1 }
+                    3 -> { y++; direction = 2 }
+                }
             }
-        } else if (ch == '7') {
-            when (direction) {
-                0 -> { x--; direction = 3 }
-                1 -> { y++; direction = 2 }
+            '7' -> {
+                when (direction) {
+                    0 -> { x--; direction = 3 }
+                    1 -> { y++; direction = 2 }
+                }
             }
-        } else if (ch == '|') {
-            when (direction) {
-                0 -> { y--; direction = 0 }
-                2 -> { y++; direction = 2 }
+            '|' -> {
+                when (direction) {
+                    0 -> { y--; direction = 0 }
+                    2 -> { y++; direction = 2 }
+                }
             }
-        } else if (ch == 'L') {
-            when (direction) {
-                2 -> { x++; direction = 1 }
-                3 -> { y--; direction = 0 }
+            'L' -> {
+                when (direction) {
+                    2 -> { x++; direction = 1 }
+                    3 -> { y--; direction = 0 }
+                }
             }
-        } else if (ch == 'J') {
-            when (direction) {
-                2 -> { x--; direction = 3 }
-                1 -> { y--; direction = 0 }
+            'J' -> {
+                when (direction) {
+                    2 -> { x--; direction = 3 }
+                    1 -> { y--; direction = 0 }
+                }
             }
-        } else if (ch == '-') {
-            when (direction) {
-                1 -> { x++; direction = 1 }
-                3 -> { x--; direction = 3 }
+            '-' -> {
+                when (direction) {
+                    1 -> { x++; direction = 1 }
+                    3 -> { x--; direction = 3 }
+                }
             }
         }
         steps++

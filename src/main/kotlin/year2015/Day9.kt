@@ -29,10 +29,10 @@ private fun part1(input: List<String>): Int {
         var distance = 0
 
         for (i in 0..< perm.size-1) {
-            try {
-                distance += distances[Pair(perm[i], perm[i+1])]!!
+            distance += try {
+                distances[Pair(perm[i], perm[i+1])]!!
             } catch (e: NullPointerException) {
-                distance += distances[Pair(perm[i+1], perm[i])]!!
+                distances[Pair(perm[i+1], perm[i])]!!
             }
         }
         if (distance < minDistance) minDistance = distance
@@ -59,10 +59,10 @@ private fun part2(input: List<String>): Int {
         var distance = 0
 
         for (i in 0..< perm.size-1) {
-            try {
-                distance += distances[Pair(perm[i], perm[i+1])]!!
+            distance += try {
+                distances[Pair(perm[i], perm[i+1])]!!
             } catch (e: NullPointerException) {
-                distance += distances[Pair(perm[i+1], perm[i])]!!
+                distances[Pair(perm[i+1], perm[i])]!!
             }
         }
         if (distance > maxDistance) maxDistance = distance

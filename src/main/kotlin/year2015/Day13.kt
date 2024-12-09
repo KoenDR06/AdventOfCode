@@ -33,12 +33,12 @@ private fun part1(input: List<String>): Int {
             try {
                 score += happiness[Pair(arrangement[i], arrangement[i+1])]!!
                 score += happiness[Pair(arrangement[i+1], arrangement[i])]!!
-            } catch (e: NullPointerException) { }
+            } catch (_: NullPointerException) { }
         }
         try {
             score += happiness[Pair(arrangement[0], arrangement[arrangement.size-1])]!!
             score += happiness[Pair(arrangement[arrangement.size-1], arrangement[0])]!!
-        } catch (e: NullPointerException) { }
+        } catch (_: NullPointerException) { }
 
         if (score > maxHappy) maxHappy = score
     }
@@ -74,12 +74,12 @@ private fun part2(input: List<String>): Int {
             try {
                 score += happiness[Pair(arrangement[i], arrangement[i+1])]!!
                 score += happiness[Pair(arrangement[i+1], arrangement[i])]!!
-            } catch (e: NullPointerException) { }
+            } catch (_: NullPointerException) { }
         }
         try {
             score += happiness[Pair(arrangement[0], arrangement[arrangement.size-1])]!!
             score += happiness[Pair(arrangement[arrangement.size-1], arrangement[0])]!!
-        } catch (e: NullPointerException) { }
+        } catch (_: NullPointerException) { }
 
         if (score > maxHappy) maxHappy = score
     }
