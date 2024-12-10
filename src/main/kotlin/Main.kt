@@ -32,10 +32,10 @@ fun solve(year: Int, day: Int, part1: (input: List<String>) -> Any, part2: (inpu
     val input = getInput(year, day)
 
     var start = System.nanoTime()
-    println("Part 1 solution is `${part1(input)}` and took:  ${(System.nanoTime() - start) / 1000000.0} ms")
+    println("Part 1 solution is `${part1(input)}` and took: ${(System.nanoTime() - start) / 1000000.0} ms")
 
     start = System.nanoTime()
-    println("Part 2 solution is `${part2(input)}` and took:  ${(System.nanoTime() - start) / 1000000.0} ms")
+    println("Part 2 solution is `${part2(input)}` and took: ${(System.nanoTime() - start) / 1000000.0} ms")
 }
 
 val dotEnv = dotenv()
