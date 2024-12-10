@@ -48,17 +48,17 @@ private fun part1(input: List<String>): Int {
     return sum
 }
 
-private fun walkTrails2(x: Int, y: Int, grid: List<List<Int>>, peaks: MutableSet<Pair<Int, Int>> = mutableSetOf()): Int {
+private fun walkTrails2(x: Int, y: Int, grid: List<List<Int>>): Int {
     val cur = grid[y][x]
     if (cur == 9) {
         return 1
     }
 
     var sum = 0
-    if (y > 0 && grid[y-1][x] == cur + 1) sum += walkTrails2(x, y-1, grid, peaks)
-    if (y < grid.size-1 && grid[y+1][x] == cur + 1) sum += walkTrails2(x, y+1, grid, peaks)
-    if (x > 0 && grid[y][x-1] == cur + 1) sum += walkTrails2(x-1, y, grid, peaks)
-    if (x < grid[0].size-1 && grid[y][x+1] == cur + 1) sum += walkTrails2(x+1, y, grid, peaks)
+    if (y > 0 && grid[y-1][x] == cur + 1) sum += walkTrails2(x, y-1, grid)
+    if (y < grid.size-1 && grid[y+1][x] == cur + 1) sum += walkTrails2(x, y+1, grid)
+    if (x > 0 && grid[y][x-1] == cur + 1) sum += walkTrails2(x-1, y, grid)
+    if (x < grid[0].size-1 && grid[y][x+1] == cur + 1) sum += walkTrails2(x+1, y, grid)
     return sum
 }
 
