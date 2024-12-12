@@ -109,3 +109,12 @@ fun List<String>.transpose(): List<String> {
 
 @Suppress("Unused")
 fun LongRange.length() = this.last - this.first + 1
+
+@Suppress("Unused")
+fun pow(base: Int, exp: Int): Int {
+    var res = 1
+    for (i in 1..exp) {
+        res *= base
+    }
+    return res
+}
