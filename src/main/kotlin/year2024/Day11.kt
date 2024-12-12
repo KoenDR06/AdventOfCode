@@ -17,7 +17,7 @@ solve(
 private fun part1(input: List<String>): Int {
     val numbers = input[0].split(" ").map { it.toLong() }.toMutableList()
 
-    for (i in 1..25) {
+    for (unused in 1..25) {
         for (i in numbers.indices) {
             if (numbers[i] == 0L) numbers[i] = 1L
             else if (numbers[i].toString().length % 2 == 0) {
