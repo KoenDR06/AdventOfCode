@@ -1,7 +1,6 @@
 package year2024
 
 import me.koendev.*
-import kotlin.contracts.contract
 
 fun main() {
 solve(
@@ -54,17 +53,13 @@ private fun part1(input: List<String>): Long {
     }
 
 
-    var sum = 0L
-    machines.forEach { m ->
-        val bPresses = (m.ay*m.targetX - m.ax*m.targetY+0.0) / (m.bx*m.ay - m.ax*m.by+0.0)
-        val aPresses = (m.targetX - m.bx*bPresses+0.0) / (m.ax+0.0)
+    return machines.sumOf { m ->
+        val bPresses = (m.ay * m.targetX - m.ax * m.targetY + 0.0) / (m.bx * m.ay - m.ax * m.by + 0.0)
+        val aPresses = (m.targetX - m.bx * bPresses + 0.0) / (m.ax + 0.0)
 
-        if (aPresses < 0 || aPresses > 100 || aPresses % 1 != 0.0 || bPresses < 0 || bPresses > 100 || bPresses % 1 != 0.0) return@forEach
-
-        sum += 3*aPresses.toLong()+bPresses.toLong()
+        if (aPresses % 1 != 0.0 || bPresses % 1 != 0.0) 0
+        else 3 * aPresses.toLong() + bPresses.toLong()
     }
-
-    return sum
 }
 
 
@@ -100,17 +95,11 @@ private fun part2(input: List<String>): Long {
         }
     }
 
+    return machines.sumOf { m ->
+        val bPresses = (m.ay * m.targetX - m.ax * m.targetY + 0.0) / (m.bx * m.ay - m.ax * m.by + 0.0)
+        val aPresses = (m.targetX - m.bx * bPresses + 0.0) / (m.ax + 0.0)
 
-    var sum = 0L
-    machines.forEach { m ->
-        val bPresses = (m.ay*m.targetX - m.ax*m.targetY+0.0) / (m.bx*m.ay - m.ax*m.by+0.0)
-        val aPresses = (m.targetX - m.bx*bPresses+0.0) / (m.ax+0.0)
-
-        if (aPresses % 1 != 0.0 || bPresses % 1 != 0.0) return@forEach
-        "$aPresses,$bPresses".println()
-
-        sum += 3*aPresses.toLong()+bPresses.toLong()
+        if (aPresses % 1 != 0.0 || bPresses % 1 != 0.0) 0
+        else 3 * aPresses.toLong() + bPresses.toLong()
     }
-
-    return sum
 }
