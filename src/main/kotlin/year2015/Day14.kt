@@ -1,4 +1,4 @@
-package year2015
+package me.koendev.year2015
 
 import me.koendev.*
 
@@ -30,7 +30,7 @@ private fun part1(input: List<String>): Int {
     return max
 }
 
-private class Reindeer(val speed: Int, val flyTime: Int, val restTime: Int) {
+private data class Reindeer(val speed: Int, val flyTime: Int, val restTime: Int) {
     var distance = 0
     var score = 0
 }

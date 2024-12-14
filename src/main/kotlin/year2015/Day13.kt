@@ -1,4 +1,4 @@
-package year2015
+package me.koendev.year2015
 
 import me.koendev.*
 

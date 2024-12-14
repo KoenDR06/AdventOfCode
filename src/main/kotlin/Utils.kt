@@ -71,7 +71,7 @@ data class MutablePair<A, B>(
 ) : Serializable
 
 @Suppress("Unused")
-class MutableTriple<A, B, C>(
+data class MutableTriple<A, B, C>(
     var first: A,
     var second: B,
     var third: C

@@ -1,4 +1,4 @@
-package year2024
+package me.koendev.year2024
 
 import me.koendev.*
 import kotlin.collections.List
