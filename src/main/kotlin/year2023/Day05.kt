@@ -13,151 +13,58 @@ fun main() {
 
 
 private fun part1(input: List<String>): Long {
-    val seeds : MutableList<MutableList<Long>> = mutableListOf()
-    seeds.add(mutableListOf())
-    seeds.add(mutableListOf())
-    val maps : MutableList<MutableMap<Pair<Long, Long>, Long>> = mutableListOf()
-    var searchNumbers = false
+    val currentValues = input[0].substring(7).split(" ").map { MutablePair(it.toLong(), false) }.toMutableList()
 
-    for(line in input) {
-        if(line.split(": ").size == 2) {
-            val stringList = line.split(": ")[1].split(" ")
-            for(item in stringList) {
-                seeds[0].add(item.toLong())
-                seeds[1].add(-1)
-            }
-        }
+    for (line in input.subList(2, input.size)) {
+        val splits = line.split(" ")
+        if (splits.size == 1) currentValues.forEach { it.second = false }
+        if (splits.size != 3) continue
 
-        else if(line.isEmpty()) {
-            searchNumbers = false
-        }
+        val dest = splits[0].toLong()
+        val source = splits[1].toLong()
+        val size = splits[2].toLong()
 
-        else if(searchNumbers) {
-            val mappingData : MutableList<Long> = mutableListOf()
+        for (index in currentValues.indices) {
+            val value = currentValues[index].first
 
-            for(item in line.split(" ")) {
-                mappingData.add(item.toLong())
-            }
+            if (currentValues[index].second) continue
 
-            maps.last()[Pair(mappingData[1], mappingData[1] + mappingData[2])] = mappingData[0] - mappingData[1]
-        }
-
-        else if(line.contains("map")) {
-            maps.add(mutableMapOf())
-            searchNumbers = true
+            if (value >= source && value < source+size) currentValues[index] = MutablePair(dest + (value-source), true)
         }
     }
 
-    var seedList = 1
-    for(map in maps) {
-        for(index in seeds[seedList].indices) {
-            var seedChecked = false
-            for(entry in map) {
-                if(entry.key.first <= seeds[1 - seedList][index] && seeds[1 - seedList][index] < entry.key.second) {
-                    seeds[seedList][index] = seeds[1 - seedList][index] + entry.value
-                    seedChecked = true
-                }
-            }
-            if(!seedChecked) {
-                seeds[seedList][index] = seeds[1 - seedList][index]
-            }
-        }
-        if(seedList == 0) {
-            seedList = 1
-        }
-        else if(seedList == 1) {
-            seedList = 0
-        }
-    }
-
-
-    return seeds[1 - seedList].min()
+    return currentValues.minOf { it.first }
 }
 
 private fun part2(input: List<String>) : Long {
-    val minimalLocations : MutableList<Long> = mutableListOf()
-    val rangesString = input[0].split(": ")[1].split(" ")
-    val ranges = mutableListOf<Long>()
-    for(item in rangesString) {
-        ranges.add(item.toLong())
-    }
+    val lines = input.map { it.split(" ").map { item -> item.toLongOrNull() } }.subList(2, input.size).filter { it.size == 1 || it.size == 3 }
 
+    val seedRanges = input[0].substring(7).split(" ").map { it.toLong() }.toMutableList()
 
-    for(i in input[0].split(": ")[1].split(" ").indices step 2) {
-        while(ranges[1 + 1] > 10_000_000) {
+    var min = Long.MAX_VALUE
 
-            if (ranges[1 + 1] <= 10_000_000) {
-                minimalLocations.add(getMinOfPart(input, ranges[i], ranges[i + 1]))
-            } else {
-                minimalLocations.add(getMinOfPart(input, ranges[i], ranges[i + 1] + 10_000_000))
-            }
+    for (index in 0..< seedRanges.size step 2) {
+        for (seed in seedRanges[index]..< seedRanges[index]+seedRanges[index+1]) {
+            var value = seed
+            var modified = false
+            for (line in lines) {
+                if (line.size == 1) modified = false
+                if (line.size != 3 || modified ) continue
 
-            ranges[i] += 10_000_000L
-            ranges[i + 1] -= 10_000_000L
+                val dest = line[0]!!
+                val source = line[1]!!
+                val size = line[2]!!
 
-        }
-    }
-
-    return minimalLocations.min()
-}
-
-private fun getMinOfPart(input: List<String>, min: Long, max: Long) : Long{
-    val seeds : MutableList<MutableList<Long>> = mutableListOf()
-    seeds.add(mutableListOf())
-    seeds.add(mutableListOf())
-    val maps : MutableList<MutableMap<Pair<Long, Long>, Long>> = mutableListOf()
-    var searchNumbers = false
-
-    for(line in input) {
-        if(line.split(": ").size == 2) {
-            for(i in min .. min + max) {
-                seeds[0].add(i)
-                seeds[1].add(-1)
-            }
-        }
-
-        else if(line.isEmpty()) {
-            searchNumbers = false
-        }
-
-        else if(searchNumbers) {
-            val mappingData : MutableList<Long> = mutableListOf()
-
-            for(item in line.split(" ")) {
-                mappingData.add(item.toLong())
-            }
-
-            maps.last()[Pair(mappingData[1], mappingData[1] + mappingData[2])] = mappingData[0] - mappingData[1]
-        }
-
-        else if(line.contains("map")) {
-            maps.add(mutableMapOf())
-            searchNumbers = true
-        }
-    }
-
-    var seedList = 1
-    for(map in maps) {
-        for(index in seeds[seedList].indices) {
-            var seedChecked = false
-            for(entry in map) {
-                if(entry.key.first <= seeds[1 - seedList][index] && seeds[1 - seedList][index] < entry.key.second) {
-                    seeds[seedList][index] = seeds[1 - seedList][index] + entry.value
-                    seedChecked = true
+                if (value >= source && value < source+size) {
+                    value = (dest + (value-source))
+                    modified = true
                 }
             }
-            if(!seedChecked) {
-                seeds[seedList][index] = seeds[1 - seedList][index]
-            }
+            if (value < min) min = value
+            if (seed % 1_000_000 == 0L) seed.println()
         }
-        if(seedList == 0) {
-            seedList = 1
-        }
-        else if(seedList == 1) {
-            seedList = 0
-        }
+        index.println()
     }
 
-
-    return seeds[1 - seedList].min()
+    return min
 }
