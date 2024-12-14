@@ -1,3 +1,6 @@
+import java.time.LocalDate
+import java.time.ZoneId
+
 plugins {
     kotlin("jvm") version "2.0.21"
 }
@@ -18,7 +21,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register("solve-all") {
+task("solve-all") {
     group = "solutions"
     description = "Run every single day of AoC"
 }
@@ -32,7 +35,7 @@ File(basePath).listFiles()!!.forEach { file ->
         val year = splits[3].split("year")[1]
         val day = splits[4].split("Day",".kt")[1].padStart(2, '0')
         val taskName = "$year-$day"
-        tasks.register<JavaExec>(taskName) {
+        task<JavaExec>(taskName) {
             group = "solutions"
             description = "Run $year day $day"
             mainClass.set("me.koendev.year$year.Day${day}Kt")
@@ -40,4 +43,43 @@ File(basePath).listFiles()!!.forEach { file ->
         }
         tasks.named("solve-all") { dependsOn(taskName) }
     }
+}
+
+task("init-day") {
+    group = "solutions"
+    description = "Initialize today's solution file."
+    val now = LocalDate.now(ZoneId.of("UTC-5"))
+
+    val outputFile = File("src/main/kotlin/year${now.year}/Day${now.dayOfMonth.toString().padStart(2, '0')}.kt")
+    if (outputFile.exists()) return@task
+    outputFile.writeText(
+        """
+            package me.koendev.year${now.year}
+    
+            import me.koendev.*
+    
+            fun main() {
+                solve(
+                    ${now.year},
+                    ${now.dayOfMonth},
+                    ::part1,
+                    ::part2
+                )
+            }
+    
+    
+            private fun part1(input: List<String>): Int {
+    
+    
+                return 0
+            }
+    
+   
+            private fun part2(input: List<String>): Int {
+    
+    
+                return 0
+            }
+        """.trimIndent()
+    )
 }
