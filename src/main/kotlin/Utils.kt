@@ -12,7 +12,6 @@ fun <T> T.println(): T {
 
 @Suppress("Unused")
 fun <T> T.wait(): T {
-    this.println()
     readln()
     return this
 }
