@@ -16,7 +16,7 @@ def fetch_input(year, day):
     input_dir = Path(f"src/main/resources/input/{year}")
     input_dir.mkdir(parents=True, exist_ok=True)
 
-    input_file = input_dir / f"{day}.txt"
+    input_file = input_dir / f"{str(day).rjust(2, '0')}.txt"
     input_file.write_text(input_data)
 
 def create_solution_file(year, day):

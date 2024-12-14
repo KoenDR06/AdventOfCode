@@ -18,13 +18,13 @@ fun fetchInput(year: Int, day: Int) {
     val input = response.body()
 
     File("src/main/resources/input/$year").mkdirs()
-    File("src/main/resources/input/$year/$day.txt").writeText(input)
+    File("src/main/resources/input/$year/${day.toString().padStart(2, '0')}.txt").writeText(input)
 }
 
 fun getInput(year: Int, day: Int): List<String> {
-    if (!File("src/main/resources/input/$year/$day.txt").exists()) fetchInput(year, day)
+    if (!File("src/main/resources/input/$year/${day.toString().padStart(2, '0')}.txt").exists()) fetchInput(year, day)
 
-    val puzzleInputFile = File("src/main/resources/input/$year/$day.txt")
+    val puzzleInputFile = File("src/main/resources/input/$year/${day.toString().padStart(2, '0')}.txt")
     return puzzleInputFile.readLines()
 }
 
