@@ -67,7 +67,7 @@ private fun part2(input: List<String>): Int {
     }
 
     var time = 1
-    var grid = MutableList(HEIGHT) { MutableList(WIDTH) {' '} }
+    val grid = MutableList(HEIGHT) { MutableList(WIDTH) {' '} }
     while (time < 10000) {
         grid.forEachIndexed { y, line -> line.forEachIndexed { x, _ -> grid[y][x] = ' ' } } // Clear the grid
         for (robot in robots) {
