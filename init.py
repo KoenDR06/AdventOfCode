@@ -28,7 +28,7 @@ def create_solution_file(year, day):
     solution_file = Path(path + f"/Day{day}.kt")
 
     if not solution_file.exists():
-        f = open(path + f"/Day{day}.kt", "a")
+        f = open(path + f"/Day{str(day).rjust(2, '0')}.kt", "a")
         f.write(
 f'''package year{year}
 
@@ -58,7 +58,7 @@ private fun part2(input: List<String>): Int {{
 }}
 ''')
         f.close()
-        subprocess.run(["git", "add", path + f"/Day{day}.kt"])
+        subprocess.run(["git", "add", path + f"/Day{str(day).rjust(2, '0')}.kt"])
 
 
 
