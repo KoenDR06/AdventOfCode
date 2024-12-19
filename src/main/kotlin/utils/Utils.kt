@@ -1,4 +1,4 @@
-package me.koendev
+package me.koendev.utils
 
 import java.io.Serializable
 import java.math.BigInteger
@@ -46,7 +46,7 @@ fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest
 @Suppress("Unused")
 fun <T> List<T>.permutations(): List<List<T>> =
     if(isEmpty()) listOf(emptyList())
-    else mutableListOf<List<T>>().also{result ->
+    else mutableListOf<List<T>>().also{ result ->
         for(i in this.indices){
             (this - this[i]).permutations().forEach {
                 result.add(it + this[i])
@@ -75,55 +75,10 @@ data class MutableTriple<A, B, C>(
     var first: A,
     var second: B,
     var third: C
-
-)
-
-@Suppress("Unused")
-class Grid<T>(input: List<List<T>>) {
-    private var grid: MutableList<MutableList<T>> = mutableListOf()
-
-    init {
-        for (line in input) {
-            grid.add(mutableListOf())
-            for (char in line) {
-                grid.last().add(char)
-            }
-        }
-    }
-
-    fun get(x: Int, y: Int): T {
-        if (x < 0 || x > grid[0].size-1) throw IllegalArgumentException("X coordinate $x out of bounds for size ${grid[0].size}")
-        if (y < 0 || y > grid.size-1) throw IllegalArgumentException("Y coordinate $y out of bounds for size ${grid.size}")
-        return grid[y][x]
-    }
-
-    fun getRow(y: Int): List<T> {
-        if (y < 0 || y > grid.size-1) throw IllegalArgumentException("Y coordinate $y out of bounds for size ${grid.size}")
-
-        return grid[y]
-    }
-
-    fun getColumn(x: Int): List<T> {
-        if (x < 0 || x > grid[0].size-1) throw IllegalArgumentException("X coordinate $x out of bounds for size ${grid[0].size}")
-
-        val res = mutableListOf<T>()
-
-        for (row in grid) {
-            res.add(row[x])
-        }
-
-        return res
-    }
-}
+) : Serializable
 
 @Suppress("Unused")
 fun LongRange.length() = this.last - this.first + 1
 
 @Suppress("Unused")
-fun pow(base: Int, exp: Int): Int {
-    var res = 1
-    for (i in 1..exp) {
-        res *= base
-    }
-    return res
-}
+fun pow(base: Int, exp: Int): Int = (1..exp).fold(1) { acc, _ -> acc * base }
