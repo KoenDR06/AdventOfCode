@@ -1,6 +1,7 @@
 package me.koendev.year2024
 
 import me.koendev.*
+import me.koendev.utils.pow
 import kotlin.math.floor
 import kotlin.math.log10
 

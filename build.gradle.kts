@@ -27,10 +27,10 @@ task("solve-all") {
 }
 
 val basePath = "src/main/kotlin/"
-File(basePath).listFiles()!!.forEach { file ->
-    if (!file.isDirectory) return@forEach
+File(basePath).listFiles()!!.forEach outer@ { file ->
+    if (file.name == "utils" || !file.isDirectory) return@outer
 
-    file.listFiles()!!.forEach { solutionFile ->
+    file.listFiles()!!.forEach inner@ { solutionFile ->
         val splits = solutionFile.toString().split("/")
         val year = splits[3].split("year")[1]
         val day = splits[4].split("Day",".kt")[1].padStart(2, '0')
@@ -56,6 +56,7 @@ task("init-day") {
         """
             package me.koendev.year${now.year}
     
+            import me.koendev.utils.*
             import me.koendev.*
     
             fun main() {
@@ -82,52 +83,4 @@ task("init-day") {
             }
         """.trimIndent()
     )
-}
-
-task("initDayWithArgs") {
-    group = "solutions"
-    description = "Initialize a solution file for a year and day."
-
-    doLast {
-        val year: Int = project.findProperty("year")?.toString()?.toInt()
-            ?: throw IllegalArgumentException("A 'year' property must be provided.")
-        val day: Int = project.findProperty("day")?.toString()?.toInt()
-            ?: throw IllegalArgumentException("A 'day' property must be provided.")
-
-        val formattedDay = day.toString().padStart(2, '0')
-        val outputFile = File("src/main/kotlin/year${year}/Day${formattedDay}.kt")
-
-        if (outputFile.exists()) {
-            println("File already exists: ${outputFile.path}")
-            return@doLast
-        }
-
-        outputFile.parentFile.mkdirs()
-        outputFile.writeText(
-            """
-            package me.koendev.year${year}
-
-            import me.koendev.*
-
-            fun main() {
-                solve(
-                    $year,
-                    $day,
-                    ::part1,
-                    ::part2
-                )
-            }
-
-            private fun part1(input: List<String>): Int {
-
-                return 0
-            }
-
-            private fun part2(input: List<String>): Int {
-
-                return 0
-            }
-            """.trimIndent()
-        )
-    }
 }

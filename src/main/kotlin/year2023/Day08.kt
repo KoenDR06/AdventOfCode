@@ -1,6 +1,7 @@
 package me.koendev.year2023
 
 import me.koendev.*
+import me.koendev.utils.findLCM
 
 fun main() {
     solve(
