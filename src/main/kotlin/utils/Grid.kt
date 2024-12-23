@@ -36,4 +36,13 @@ class Grid<T>(input: List<List<T>>) {
 
         return res
     }
+
+    fun find(item: T): Pair<Int, Int>? {
+        for ((y, line) in grid.withIndex()) {
+            for ((x, cell) in line.withIndex()) {
+                if (cell == item) return Pair(x, y)
+            }
+        }
+        return null
+    }
 }
