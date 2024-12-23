@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.time.LocalDate
 import java.time.ZoneId
 
@@ -45,15 +46,62 @@ File(basePath).listFiles()!!.forEach outer@ { file ->
     }
 }
 
+fun write(day: Int, year: Int) {
+    val outputFile = File("src/main/kotlin/year${year}/Day${day.toString().padStart(2, '0')}.kt")
+    if (outputFile.exists()) return else outputFile.ensureParentDirsCreated()
+    outputFile.writeText("""
+            package me.koendev.year${year}
+    
+            import me.koendev.utils.*
+            import me.koendev.*
+    
+            fun main() {
+                solve(
+                    ${year},
+                    ${day},
+                    ::part1,
+                    ::part2
+                )
+            }
+    
+            private fun part1(input: List<String>): Int {
+    
+    
+                return 0
+            }
+    
+    
+            private fun part2(input: List<String>): Int {
+    
+    
+                return 0
+            }
+        """.trimIndent())
+}
+
 task("init-day") {
     group = "solutions"
     description = "Initialize today's solution file."
-    val now = LocalDate.now(ZoneId.of("UTC-5"))
 
-    val outputFile = File("src/main/kotlin/year${now.year}/Day${now.dayOfMonth.toString().padStart(2, '0')}.kt")
-    if (outputFile.exists()) return@task
-    outputFile.writeText(
-        """
+    doFirst {
+        val splits = project.property("day").toString().split("-").map { it.toIntOrNull() }.filterNotNull()
+        if (splits.size != 2) return@doFirst
+
+        write(splits[1], splits[0])
+    }
+}
+
+task("init-today") {
+    group = "solutions"
+    description = "Initialize today's solution file."
+
+    doFirst {
+        val now = LocalDate.now(ZoneId.of("UTC-5"))
+
+        val outputFile = File("src/main/kotlin/year${now.year}/Day${now.dayOfMonth.toString().padStart(2, '0')}.kt")
+        if (outputFile.exists()) return@doFirst
+        outputFile.writeText(
+            """
             package me.koendev.year${now.year}
     
             import me.koendev.utils.*
@@ -68,19 +116,19 @@ task("init-day") {
                 )
             }
     
-    
             private fun part1(input: List<String>): Int {
     
     
                 return 0
             }
     
-   
+    
             private fun part2(input: List<String>): Int {
     
     
                 return 0
             }
         """.trimIndent()
-    )
+        )
+    }
 }
