@@ -1,8 +1,12 @@
 package me.koendev.utils
 
 @Suppress("Unused")
-class Grid<T>(input: List<List<T>>) {
+class Grid<T>(input: List<List<T>>): Iterable<Triple<Int,Int,T>> {
     private var grid: MutableList<MutableList<T>> = mutableListOf()
+
+    val height get() = grid.size
+    val width get() = grid[0].size
+
 
     init {
         for (line in input) {
@@ -44,5 +48,24 @@ class Grid<T>(input: List<List<T>>) {
             }
         }
         return null
+    }
+
+    override fun iterator(): Iterator<Triple<Int,Int,T>> {
+        val res = mutableListOf<Triple<Int,Int,T>>()
+        grid.forEachIndexed { y, row ->
+            row.forEachIndexed { x, item ->
+                res += Triple(x, y, item)
+            }
+        }
+        return res.toList().iterator()
+    }
+
+    fun println() {
+        grid.forEach {
+            it.forEach { item ->
+                print(item)
+            }
+            println("")
+        }
     }
 }

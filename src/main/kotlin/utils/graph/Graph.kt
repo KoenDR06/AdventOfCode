@@ -5,38 +5,42 @@ import me.koendev.utils.println
 abstract class BaseGraph
 
 @Suppress("Unused", "MemberVisibilityCanBePrivate")
-class Graph<T>: BaseGraph() {
-    private val nodes: MutableMap<String, Node<T>> = mutableMapOf()
-    private val edges: MutableList<Edge<T>> = mutableListOf()
+class Graph<NodeType, NameType>: BaseGraph() {
+    var nodes: MutableMap<NameType, Node<NodeType>> = mutableMapOf()
+    val edges: MutableList<Edge<NodeType>> = mutableListOf()
 
-    fun getNode(name: String) = if (nodes[name] == null) throw NodeDoesNotExistsException() else nodes[name]!!
+    fun getNode(name: NameType) = if (nodes[name] == null) throw NodeDoesNotExistsException() else nodes[name]!!
 
-    fun addNode(node: Node<T>, name: String) {
+    fun addNode(node: Node<NodeType>, name: NameType) {
         if (name in nodes.keys) throw NodeExistsException()
         nodes[name] = node
     }
 
-    fun removeNode(name: String) {
+    fun removeNode(name: NameType) {
         if (nodes.remove(name) == null) throw NodeDoesNotExistsException()
     }
 
-    fun addEdge(from: String, to: String) {
-        if (from !in nodes.keys || to !in nodes.keys) throw NodeDoesNotExistsException()
-        if (Edge(nodes[from]!!, nodes[to]!!) in edges) throw EdgeExistsException()
-        if (Edge(nodes[to]!!, nodes[from]!!) in edges) throw EdgeExistsException()
-        edges.add(Edge(nodes[from]!!, nodes[to]!!))
+    fun addEdge(from: NameType, to: NameType, weight: Number = 1) {
+        if (from !in nodes.keys || to !in nodes.keys) throw NodeDoesNotExistsException("Node $from or node $to does not exist in graph.")
+        if (edges.any { it.a == nodes[from]!! && it.b == nodes[to]!! }) throw EdgeExistsException()
+        if (edges.any { it.a == nodes[to]!! && it.b == nodes[from]!! }) throw EdgeExistsException()
+        edges.add(Edge(nodes[from]!!, nodes[to]!!, weight))
     }
 
-    fun removeEdge(from: String, to: String) {
-        if (!edges.remove(Edge(nodes[from]!!, nodes[to]!!))) throw NodeDoesNotExistsException()
+    fun removeEdge(from: NameType, to: NameType) {
+        val edgesToRemove = edges.filter {(from == it.a && to == it.a) || (from == it.b && to == it.a)}
+
+        if (edgesToRemove.isEmpty()) throw EdgeDoesNotExistException()
+
+        edges.removeAll(edgesToRemove)
     }
 
-    fun getNeighbors(name: String): Map<String, Node<T>> {
+    fun getNeighbors(name: NameType): MutableList<Node<NodeType>> {
         return getNeighbors(getNode(name))
     }
 
-    fun getNeighbors(node: Node<T>): Map<String, Node<T>> {
-        val neighbors = mutableListOf<Node<T>>()
+    fun getNeighbors(node: Node<NodeType>): MutableList<Node<NodeType>> {
+        val neighbors = mutableListOf<Node<NodeType>>()
 
         neighbors += edges.filter { edge ->
             edge.a == node
@@ -50,8 +54,12 @@ class Graph<T>: BaseGraph() {
             edge.a
         }
 
-        neighbors.println()
+        return neighbors
+    }
 
-        return mapOf()
+    fun removeDisconnectedNodes() {
+        nodes = nodes.filter { node ->
+            getNeighbors(node.value).isNotEmpty()
+        }.toMutableMap()
     }
 }

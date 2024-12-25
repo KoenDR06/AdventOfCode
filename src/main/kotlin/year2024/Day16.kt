@@ -1,7 +1,11 @@
 package me.koendev.year2024
 
-import me.koendev.utils.*
-import me.koendev.*
+import me.koendev.solve
+import me.koendev.utils.Grid
+import me.koendev.utils.graph.EdgeExistsException
+import me.koendev.utils.graph.Graph
+import me.koendev.utils.graph.Node
+import me.koendev.utils.println
 import kotlin.math.min
 
 fun main() {
@@ -57,37 +61,38 @@ private fun part2(input: List<String>): Int {
     val minScore = part1(input)
 
     val grid = Grid(input.map { it.toCharArray().toList() })
+    val graph = Graph<Char, Position>()
 
-    val (startX, startY) = grid.find('S')!!
+    grid.filter { (_, _, char) -> char != '#' }.forEach { (x, y, char) ->
+        graph.addNode(Node(char), Position(x, y, 0))
+        graph.addNode(Node(char), Position(x, y, 1))
+        graph.addNode(Node(char), Position(x, y, 2))
+        graph.addNode(Node(char), Position(x, y, 3))
 
-    val minPathCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
-
-    fun dfs(grid: Grid<Char>, pair: Pair<Int, List<Position>>) {
-        val score = pair.first
-        val path = pair.second
-        val p = path.last()
-
-        if (score > minScore) return
-
-        if (grid.get(p.x, p.y) == 'E') {
-            minPathCells.addAll(path.map { Pair(it.x, it.y) })
-            println("Path Found!")
-        }
-
-        val (dx, dy) = when(p.direction) {
-            0 -> Pair(0,-1)
-            1 -> Pair(1,0)
-            2 -> Pair(0,1)
-            3 -> Pair(-1,0)
-            else -> throw Exception("Unreachable")
-        }
-
-        if (grid.get(p.x+dx, p.y+dy) != '#') { dfs(grid, Pair(score+1, path.copy()+Position(p.x+dx, p.y+dy, p.direction))) }
-        if (grid.get(p.x-dy, p.y+dx) != '#') dfs(grid, Pair(score+1001, path.copy()+Position(p.x-dy, p.y+dx, (p.direction+1)%4)))
-        if (grid.get(p.x+dy, p.y-dx) != '#') dfs(grid, Pair(score+1001, path.copy()+Position(p.x+dy, p.y-dx, (p.direction+3)%4)))
     }
 
-    dfs(grid, Pair(0, listOf(Position(startX, startY, 1))))
+    grid.filter { (_, _, char) -> char != '#' }.forEach { (x, y, _) ->
+        try {
+            if (x > 0 && grid.get(x - 1, y) != '#') graph.addEdge(Position(x - 1, y, 1), Position(x, y, 3))
+            if (x < grid.width - 1 && grid.get(x + 1, y) != '#') graph.addEdge(Position(x + 1, y, 3), Position(x, y, 1))
+            if (y > 0 && grid.get(x, y - 1) != '#') graph.addEdge(Position(x, y - 1, 2), Position(x, y, 0))
+            if (y < grid.height - 1 && grid.get(x, y + 1) != '#') graph.addEdge(
+                Position(x, y + 1, 2),
+                Position(x, y, 0)
+            )
+        } catch(e: EdgeExistsException) {
+            e.println()
+        }
+    }
 
-    return minPathCells.size
+    graph.nodes.forEach { (name, node) ->
+        val neighbors = graph.getNeighbors(node)
+        if (neighbors.size == 1) {}
+    }
+
+    graph.nodes.size.println()
+    graph.removeDisconnectedNodes()
+    graph.nodes.size.println()
+
+    return 0
 }
