@@ -81,7 +81,10 @@ data class MutableTriple<A, B, C>(
 fun LongRange.length() = this.last - this.first + 1
 
 @Suppress("Unused")
-fun pow(base: Int, exp: Int): Int = (1..exp).fold(1) { acc, _ -> acc * base }
+fun pow(base: Int, exp: Int) = (1..exp).fold(1) { acc, _ -> acc * base }
+
+@Suppress("Unused")
+fun pow(base: Long, exp: Long) = (1..exp).fold(1L) { acc, _ -> acc * base }
 
 @Suppress("Unused")
 fun <T> List<T>.copy() = this.toMutableList()
